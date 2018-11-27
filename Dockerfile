@@ -20,6 +20,9 @@ RUN sudo apt-get install -y locales curl python3-distutils && \
 
 ENV LANG en_US.utf8
 
+WORKDIR /home
+RUN sudo chomd -R 777 users
+
 WORKDIR /home/users
 COPY requirements.txt /home/users
 COPY file/code /home/users
