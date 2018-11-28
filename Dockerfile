@@ -1,4 +1,3 @@
-#make 2018.11.23 matsubara
 FROM ubuntu:18.04
 RUN apt-get -y update && \
     apt-get -y upgrade && \
@@ -16,20 +15,19 @@ RUN sudo apt-get install -y locales curl python3-distutils && \
     sudo python3 get-pip.py && \
     sudo pip install -U pip && \
     sudo rm -rf /var/lib/apt/lists/* && \
-    sudo localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+    sudo localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
+    sudo apt-get -y update && \
+    sudo apt-get -y upgrade && \
+    sudo apt-get install -y git
 
 ENV LANG en_US.utf8
 
-WORKDIR /home
-RUN sudo chomd -R 777 users
-
 WORKDIR /home/users
 COPY requirements.txt /home/users
-COPY file/code /home/users
 RUN  sudo pip install -r requirements.txt && \
-     jupyter notebook --generate-config
+     jupyter notebook --generate-config && \
+     echo “c.NotebookApp.ip =\'0.0.0.0\' “ >> jupyter_notebook_config.py && \
+     git clone https://github.com/oreilly-japan/deep-learning-from-scratch.git && \
+     git clone https://github.com/oreilly-japan/deep-learning-from-scratch-2.git && \
+     git clone https://github.com/yohokuno/deeplearning.git
 
-WORKDIR /home/users/.jupyter
-COPY /file/jupyter_notebook_config.py /home/users/.jupyter/jupyter_notebook_config.py
-
-WORKDIR /home/users
