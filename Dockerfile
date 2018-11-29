@@ -23,7 +23,7 @@ RUN sudo apt-get install -y locales curl python3-distutils && \
 ENV LANG en_US.utf8
 
 WORKDIR /home/users
-COPY requirements.txt code /home/users
+COPY requirements.txt code /home/users/
 RUN  sudo pip install -r requirements.txt && \
      jupyter notebook --generate-config && \
      echo “c.NotebookApp.ip =\'0.0.0.0\' “ >> jupyter_notebook_config.py && \
