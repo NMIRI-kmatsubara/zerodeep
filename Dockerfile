@@ -29,5 +29,6 @@ RUN  sudo pip install -r requirements.txt && \
      echo c.NotebookApp.ip =\'0.0.0.0\'  >> .jupyter/jupyter_notebook_config.py && \
      git clone https://github.com/oreilly-japan/deep-learning-from-scratch.git && \
      git clone https://github.com/oreilly-japan/deep-learning-from-scratch-2.git && \
-     git clone https://github.com/yohokuno/deeplearning.git
-
+     git clone https://github.com/yohokuno/deeplearning.git && \
+     git clone https://github.com/noritake41/100_nokku.git
+     
